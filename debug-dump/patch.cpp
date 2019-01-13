@@ -23,6 +23,11 @@ void evaluate(Context ctx) {
     DEBUG_SERIAL.print(F(" [")); DEBUG_SERIAL.print(len); DEBUG_SERIAL.print(F("] rows "));DEBUG_SERIAL.print(rows);
     DEBUG_SERIAL.print(F("\n"));
 
+    if (!_object || !buf) {
+      DEBUG_SERIAL.print(F("  NULL object/buffer"));
+      return;
+      }
+
     // rows of 16
     for (; buf < end; buf += 16) {
         DEBUG_SERIAL.print((long) buf);DEBUG_SERIAL.print(F(": "));

@@ -21,5 +21,4 @@ void evaluate(Context ctx) {
   }
 
   emitValue<output_buffer>(ctx, _object); // convenience
-
 }

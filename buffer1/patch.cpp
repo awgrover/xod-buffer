@@ -13,9 +13,14 @@ void evaluate(Context ctx) {
   if (!isSettingUp()) return;
   auto _state = getState(ctx);
   uint16_t bytes = static_cast<uint16_t> (getValue<input_bytes>(ctx)); // casting gives us 16 bits
-    DEBUG_SERIAL.print(F("buf "));DEBUG_SERIAL.print(bytes);
-  _state->buffer = malloc( bytes ); // try
-    DEBUG_SERIAL.print(F(" @ "));DEBUG_SERIAL.print((long) _state->buffer);
+  //DEBUG_SERIAL.print(F("buf "));DEBUG_SERIAL.print(bytes);
+
+  _state->buffer = NULL; // we might not even try allocating
+  if (bytes > 0) {
+    _state->buffer = malloc( bytes ); // try
+    }
+  //DEBUG_SERIAL.print(F(" @ "));DEBUG_SERIAL.print((long) _state->buffer);
+
   if (_state->buffer) {
     // worked
     _state->len = bytes;
@@ -25,5 +30,5 @@ void evaluate(Context ctx) {
   else {
     emitValue<output_ERR>(ctx, 1);
     }
-    DEBUG_SERIAL.print(F("\n"));
+  //DEBUG_SERIAL.print(F("\n"));
 }
