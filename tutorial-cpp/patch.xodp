@@ -1,0 +1,88 @@
+{
+  "comments": [
+    {
+      "content": "# Using buffer1 in your .cpp",
+      "id": "BJ-qgAwfE",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 51,
+        "width": 306
+      }
+    },
+    {
+      "content": "## Use reinterpret_cast to make it look like your data structure\nDon't forget to check for compatible number of bytes.\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n\n    // aka word array\n    uint16_t* byte_buffer = reinterpret_cast <uint16_t *> ( _object->buffer ); \n    \n    // you weren't going to forget to check the len?\n    if ( sizeof(SomeStruct)  >= _object->len ) {\n        emitValue<output_ERR>(ctx, 1); // can't use it\n    }\n    else {\n        // any \"type\" you want. if it is right for you.\n        SomeStruct* my_fields = reinterpret_cast<SomeStruct*>( _object->buffer ); \n    \n    \n        ....\n    }\n}\n```",
+      "id": "BJYhNRwfN",
+      "position": {
+        "x": 510,
+        "y": 612
+      },
+      "size": {
+        "height": 459,
+        "width": 646
+      }
+    },
+    {
+      "content": "# datatype awgrover/buffer1\nThis is the custom-type you get:\n```\nstruct {\n  std::size_t len; // larger than XOD can deal with\n  byte * buffer;\n}\n```\n",
+      "id": "Hk0hxAPG4",
+      "position": {
+        "x": 0,
+        "y": 102
+      },
+      "size": {
+        "height": 153,
+        "width": 442
+      }
+    },
+    {
+      "content": "## `auto` should work.\nJust refer tothe struct fields.\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n    char* byte_buffer = buffer1->buffer;\n    \n    \n    ....\n}\n```",
+      "id": "HkN74CDfV",
+      "position": {
+        "x": 0,
+        "y": 306
+      },
+      "size": {
+        "height": 255,
+        "width": 510
+      }
+    },
+    {
+      "content": "## Decompose into the char* and len for typical usage:\nThe `buffer` object carries it's size with it!\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    \n    // your custom-type/class\n    auto radio = getValue<input_radio>;\n    \n    // very common: something( char*, int len);\n    radio->receive( buffer1->buffer, buffer1->len);\n    \n    ....\n    emit...\n}\n```\n",
+      "id": "S1U47CPfN",
+      "position": {
+        "x": 510,
+        "y": 102
+      },
+      "size": {
+        "height": 459,
+        "width": 510
+      }
+    },
+    {
+      "content": "## Create your own buffer1\nIf you want to be the creator\n```\n// maybe this is the \"constructor\" for your library custom-type...\nvoid evaluate(Context ctx) {\n    \n    int len = 64; // number of bytes\n    char * buffer = malloc( len );\n    // if (!buffer) fail: out of memory\n    __awgrover__buffer1.State* buffer1= new __awgrover__buffer1.State;\n    buffer1->buffer = buffer;\n    buffer1->len = len;\n\n    ...\n    // save the buffer for yourself and provide some node that gets it, or emit it here\n    emitValue<output_buffer1>(ctx, buffer1); // set the output pin to awgrover/output-buffer1\n}\n```",
+      "id": "rJMK8AwGE",
+      "position": {
+        "x": 0,
+        "y": 1122
+      },
+      "size": {
+        "height": 459,
+        "width": 714
+      }
+    },
+    {
+      "content": "## Always check the ->len vs. an index\nDon't use an index without checking!\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    \n    auto index = getValue<input_i>; // check this\n    \n    // Check for out-of-range, and signal an error\n    // Remember, buffer1->buffer is a char*\n    // If using words, it's (i*2) >= len, etc.\n    if ( i < 0 || i  >= _object->len ) {\n        emitValue<output_ERR>(ctx, 1); // pulse\n    }\n    else {\n        // do something useful...\n        something = ... buffer1->buffer[i] ...\n        emitValue<output_something>(ctx, something);\n        }\n    }\n}\n```\n",
+      "id": "rkVQWRDM4",
+      "position": {
+        "x": 0,
+        "y": 612
+      },
+      "size": {
+        "height": 459,
+        "width": 510
+      }
+    }
+  ]
+}

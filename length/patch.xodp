@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "cpp",
+      "position": {
+        "x": 68,
+        "y": 204
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "i-buffer1",
+      "label": "buffer1",
+      "position": {
+        "x": 68,
+        "y": 102
+      },
+      "type": "@/input-buffer1"
+    },
+    {
+      "id": "o-dev",
+      "label": "buffer",
+      "position": {
+        "x": 68,
+        "y": 306
+      },
+      "type": "@/output-buffer1"
+    },
+    {
+      "id": "o-val",
+      "label": "val",
+      "position": {
+        "x": 136,
+        "y": 306
+      },
+      "type": "xod/patch-nodes/output-number"
+    }
+  ]
+}

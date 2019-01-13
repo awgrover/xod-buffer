@@ -1,0 +1,12 @@
+{
+  "authors": [
+    "awgrover",
+    "https://forum.xod.io/u/awgrover",
+    "Alan Grover <awgrover@gmail.com>",
+    "Alan Grover <awgrover@gmail.com>"
+  ],
+  "description": "buffer1-ll\nBuffer object\nA buffer of bytes/words for other libraries that need a buffer\n\nMechanically converted by https://forum.xod.io/u/awgrover using github.com:awgrover/arduino-2-xod from:\nbuffer1 (awgbuff) by Alan Grover <awgrover@gmail.com>. Version 1.0.0\nhttps://github.com/awgrover/xod-buffer",
+  "license": "GPLv3",
+  "name": "buffer1-ll",
+  "version": "1.0.0"
+}

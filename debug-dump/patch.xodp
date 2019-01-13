@@ -1,0 +1,40 @@
+{
+  "description": "Dump the buffer to the console if debugging is on",
+  "nodes": [
+    {
+      "id": "BJv1CROGN",
+      "position": {
+        "x": 68,
+        "y": 102
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "H1bkf1Yz4",
+      "label": "mark",
+      "position": {
+        "x": 34,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-string"
+    },
+    {
+      "id": "Hkgv00dz4",
+      "label": "trigger",
+      "position": {
+        "x": 170,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "SJzWCROz4",
+      "label": "buffer1",
+      "position": {
+        "x": 68,
+        "y": 0
+      },
+      "type": "@/input-buffer1"
+    }
+  ]
+}
