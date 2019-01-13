@@ -55,7 +55,7 @@
     },
     {
       "id": "o-dev",
-      "label": "dev",
+      "label": "buffer",
       "position": {
         "x": 68,
         "y": 306
