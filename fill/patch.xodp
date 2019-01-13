@@ -2,16 +2,6 @@
   "description": "Fill the entire buffer with a value.\nDefault fill is 0.",
   "nodes": [
     {
-      "description": "If the `buffer1` wasn't input, or the buffer wasn't allocated.",
-      "id": "H1Fl61tG4",
-      "label": "ERR",
-      "position": {
-        "x": 170,
-        "y": 306
-      },
-      "type": "xod/patch-nodes/output-pulse"
-    },
-    {
       "id": "cpp",
       "position": {
         "x": 68,
