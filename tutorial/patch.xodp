@@ -25,6 +25,18 @@
       }
     },
     {
+      "content": "The pulse could happen before `length` emits the `buffer`, or the `val`,\nso `set-byte` will have a bad `buffer1`, or bad `val`",
+      "id": "BJEO-lYzN",
+      "position": {
+        "x": 306,
+        "y": 4488
+      },
+      "size": {
+        "height": 153,
+        "width": 204
+      }
+    },
+    {
       "content": "i.e. data-to-pulse",
       "id": "BJdzShDfN",
       "position": {
@@ -37,6 +49,18 @@
       }
     },
     {
+      "content": "Might trigger with an absent `buffer1`",
+      "id": "BJxJygtfN",
+      "position": {
+        "x": -34,
+        "y": 4590
+      },
+      "size": {
+        "height": 51,
+        "width": 204
+      }
+    },
+    {
       "content": "back to pulse",
       "id": "Bk3ZITwfN",
       "position": {
@@ -46,6 +70,18 @@
       "size": {
         "height": 51,
         "width": 102
+      }
+    },
+    {
+      "content": "The pulse & value must go together.",
+      "id": "BkL0QMeFfN",
+      "position": {
+        "x": 850,
+        "y": 4590
+      },
+      "size": {
+        "height": 51,
+        "width": 204
       }
     },
     {
@@ -85,6 +121,18 @@
       }
     },
     {
+      "content": "## Only use chained `buffer1` if you also use the chained `trigger`.\nThe output `buffer` is only emitted if the `done` is emitted.",
+      "id": "Byd6TkKfE",
+      "position": {
+        "x": 0,
+        "y": 4182
+      },
+      "size": {
+        "height": 51,
+        "width": 714
+      }
+    },
+    {
       "content": "You'd do something useful with the value(s).",
       "id": "Byhrb6wfE",
       "position": {
@@ -106,6 +154,18 @@
       "size": {
         "height": 51,
         "width": 204
+      }
+    },
+    {
+      "content": "### Wrong: Possible pulse before buffer1",
+      "id": "H1zr1lKGV",
+      "position": {
+        "x": 136,
+        "y": 4386
+      },
+      "size": {
+        "height": 51,
+        "width": 306
       }
     },
     {
@@ -301,6 +361,18 @@
       }
     },
     {
+      "content": "### Right: `buffer` and `done` from same preceding node.",
+      "id": "r1nKfgFGN",
+      "position": {
+        "x": 612,
+        "y": 4794
+      },
+      "size": {
+        "height": 51,
+        "width": 442
+      }
+    },
+    {
       "content": "A properly \"mutating\" node. Puts somethings in the buffer.",
       "id": "r1wbA2DzE",
       "position": {
@@ -337,6 +409,18 @@
       }
     },
     {
+      "content": "The bus is always a valid value",
+      "id": "rJSAXfgtz4",
+      "position": {
+        "x": 578,
+        "y": 4692
+      },
+      "size": {
+        "height": 51,
+        "width": 136
+      }
+    },
+    {
       "content": "# buffer1 Tutorial\nA buffer of bytes/words for other libraries that need a buffer\n",
       "id": "readme",
       "position": {
@@ -370,6 +454,18 @@
       "size": {
         "height": 51,
         "width": 510
+      }
+    },
+    {
+      "content": "### Right: Use known good `buffer1` (from bus)",
+      "id": "rkiVfgKMN",
+      "position": {
+        "x": 646,
+        "y": 4386
+      },
+      "size": {
+        "height": 51,
+        "width": 306
       }
     },
     {
@@ -442,6 +538,18 @@
       "size": {
         "height": 51,
         "width": 170
+      }
+    },
+    {
+      "content": "Both happen together",
+      "id": "ryqAfeFzV",
+      "position": {
+        "x": 578,
+        "y": 4896
+      },
+      "size": {
+        "height": 51,
+        "width": 136
       }
     }
   ],
@@ -623,6 +731,28 @@
       }
     },
     {
+      "id": "ByUKRkKM4",
+      "input": {
+        "nodeId": "SyZFRJYzV",
+        "pinKey": "i-buffer1"
+      },
+      "output": {
+        "nodeId": "r16_RktfV",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ByeWyxFfN",
+      "input": {
+        "nodeId": "S11qCktz4",
+        "pinKey": "i-trigger"
+      },
+      "output": {
+        "nodeId": "rJRxkxKfN",
+        "pinKey": "__out__"
+      }
+    },
+    {
       "id": "H16FfawzN",
       "input": {
         "nodeId": "Hkv3WpPGE",
@@ -766,6 +896,28 @@
       }
     },
     {
+      "id": "HJhIRJtGE",
+      "input": {
+        "nodeId": "HyqLRytMV",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "B1LnxnDfN",
+        "pinKey": "B1x2RV3eZ"
+      }
+    },
+    {
+      "id": "Hkf9RJFMN",
+      "input": {
+        "nodeId": "S11qCktz4",
+        "pinKey": "i-buffer1"
+      },
+      "output": {
+        "nodeId": "SyZFRJYzV",
+        "pinKey": "o-dev"
+      }
+    },
+    {
       "id": "Hy2KravzV",
       "input": {
         "nodeId": "BybFBTDzV",
@@ -785,6 +937,17 @@
       "output": {
         "nodeId": "BydsInwfE",
         "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hy4oNxtfE",
+      "input": {
+        "nodeId": "HJw0meYfE",
+        "pinKey": "BkjI-COLb"
+      },
+      "output": {
+        "nodeId": "ryRQfeYfE",
+        "pinKey": "o-val"
       }
     },
     {
@@ -898,6 +1061,17 @@
       }
     },
     {
+      "id": "SJFEMlFz4",
+      "input": {
+        "nodeId": "ryRQfeYfE",
+        "pinKey": "i-buffer1"
+      },
+      "output": {
+        "nodeId": "Bk4VMeYG4",
+        "pinKey": "__out__"
+      }
+    },
+    {
       "id": "SJONITPfV",
       "input": {
         "nodeId": "SJG_BTvMN",
@@ -931,6 +1105,17 @@
       }
     },
     {
+      "id": "SJzwMlYG4",
+      "input": {
+        "nodeId": "Skl0XGlFz4",
+        "pinKey": "i-buffer1"
+      },
+      "output": {
+        "nodeId": "SynLGltGN",
+        "pinKey": "__out__"
+      }
+    },
+    {
       "id": "Sk2nSpDzE",
       "input": {
         "nodeId": "rkU2STwf4",
@@ -953,6 +1138,17 @@
       }
     },
     {
+      "id": "Sk8jNgYz4",
+      "input": {
+        "nodeId": "Skl0XGlFz4",
+        "pinKey": "i-trigger"
+      },
+      "output": {
+        "nodeId": "HJw0meYfE",
+        "pinKey": "ByAIWR_UZ"
+      }
+    },
+    {
       "id": "SkCtR3vf4",
       "input": {
         "nodeId": "rkNHahvzE",
@@ -961,6 +1157,17 @@
       "output": {
         "nodeId": "r1lJdRnPfE",
         "pinKey": "ByAIWR_UZ"
+      }
+    },
+    {
+      "id": "SkHq01FfE",
+      "input": {
+        "nodeId": "S11qCktz4",
+        "pinKey": "i-i"
+      },
+      "output": {
+        "nodeId": "SyZFRJYzV",
+        "pinKey": "o-val"
       }
     },
     {
@@ -994,6 +1201,17 @@
       "output": {
         "nodeId": "S1uKX3DGE",
         "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkXCmzlFf4",
+      "input": {
+        "nodeId": "Skl0XGlFz4",
+        "pinKey": "i-i"
+      },
+      "output": {
+        "nodeId": "ryRQfeYfE",
+        "pinKey": "o-val"
       }
     },
     {
@@ -1048,6 +1266,17 @@
       },
       "output": {
         "nodeId": "SJkKMhDG4",
+        "pinKey": "o-done"
+      }
+    },
+    {
+      "id": "SyWKfltMN",
+      "input": {
+        "nodeId": "SkO_zeYME",
+        "pinKey": "i-trigger"
+      },
+      "output": {
+        "nodeId": "Skl0XGlFz4",
         "pinKey": "o-done"
       }
     },
@@ -1159,6 +1388,17 @@
       "output": {
         "nodeId": "SkNKETDMV",
         "pinKey": "o-done"
+      }
+    },
+    {
+      "id": "rk1KzeFMV",
+      "input": {
+        "nodeId": "SkO_zeYME",
+        "pinKey": "i-buffer1"
+      },
+      "output": {
+        "nodeId": "Skl0XGlFz4",
+        "pinKey": "o-dev"
       }
     },
     {
@@ -1334,6 +1574,15 @@
       "type": "xod/core/flip-flop"
     },
     {
+      "id": "Bk4VMeYG4",
+      "label": "buffer1",
+      "position": {
+        "x": 714,
+        "y": 4284
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
       "boundLiterals": {
         "B1x2RV3eZ": "15"
       },
@@ -1435,6 +1684,14 @@
         "y": 1632
       },
       "type": "xod/core/constant-number"
+    },
+    {
+      "id": "HJw0meYfE",
+      "position": {
+        "x": 816,
+        "y": 4590
+      },
+      "type": "xod/core/pulse-on-change"
     },
     {
       "id": "HJwOWTDzE",
@@ -1553,6 +1810,23 @@
       "type": "xod/core/constant-number"
     },
     {
+      "id": "HyqLRytMV",
+      "label": "len",
+      "position": {
+        "x": 306,
+        "y": 306
+      },
+      "type": "xod/patch-nodes/to-bus"
+    },
+    {
+      "id": "S11qCktz4",
+      "position": {
+        "x": 170,
+        "y": 4590
+      },
+      "type": "@/set-byte"
+    },
+    {
       "id": "S1Gf4avGE",
       "label": "Ex. Send Request",
       "position": {
@@ -1655,6 +1929,22 @@
       "type": "@/set-byte"
     },
     {
+      "id": "SkO_zeYME",
+      "position": {
+        "x": 714,
+        "y": 4896
+      },
+      "type": "@/set-byte"
+    },
+    {
+      "id": "Skl0XGlFz4",
+      "position": {
+        "x": 714,
+        "y": 4692
+      },
+      "type": "@/set-byte"
+    },
+    {
       "id": "SyNJ3hDfN",
       "label": "Ex. Secret Decrypt",
       "position": {
@@ -1670,6 +1960,14 @@
         "y": 612
       },
       "type": "xod/core/watch"
+    },
+    {
+      "id": "SyZFRJYzV",
+      "position": {
+        "x": 170,
+        "y": 4488
+      },
+      "type": "@/length"
     },
     {
       "id": "Syc9h2Df4",
@@ -1688,6 +1986,15 @@
       "type": "xod/core/buffer"
     },
     {
+      "id": "SynLGltGN",
+      "label": "buffer1",
+      "position": {
+        "x": 646,
+        "y": 4488
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
       "id": "SyvVLnvG4",
       "label": "Ex. Secret Encryption",
       "position": {
@@ -1695,6 +2002,15 @@
         "y": 1326
       },
       "type": "@/set-byte"
+    },
+    {
+      "id": "r16_RktfV",
+      "label": "buffer1",
+      "position": {
+        "x": 170,
+        "y": 4284
+      },
+      "type": "xod/patch-nodes/from-bus"
     },
     {
       "boundLiterals": {
@@ -1771,6 +2087,14 @@
       "type": "xod/core/select"
     },
     {
+      "id": "rJRxkxKfN",
+      "position": {
+        "x": 272,
+        "y": 4488
+      },
+      "type": "xod/core/pulse-on-true"
+    },
+    {
       "arityLevel": 3,
       "id": "rJhXFTvzE",
       "label": "some calculation...",
@@ -1843,6 +2167,14 @@
         "y": 2856
       },
       "type": "xod/core/watch"
+    },
+    {
+      "id": "ryRQfeYfE",
+      "position": {
+        "x": 714,
+        "y": 4488
+      },
+      "type": "@/length"
     },
     {
       "id": "ryUGYaPzE",

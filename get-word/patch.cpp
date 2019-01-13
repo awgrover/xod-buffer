@@ -19,7 +19,7 @@ void evaluate(Context ctx) {
   else {
     auto _rez = reinterpret_cast <uint16_t *> ( _object->buffer )[ i ]; // int
 
-    emitValue<output_buffer>(ctx, _object); // convenience
     emitValue<output_val>(ctx, _rez); // int
   }
+  emitValue<output_buffer>(ctx, _object); // convenience
 }

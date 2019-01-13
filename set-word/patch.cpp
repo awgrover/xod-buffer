@@ -20,7 +20,7 @@ void evaluate(Context ctx) {
   }
   else {
     reinterpret_cast <uint16_t *> (_object->buffer)[i] = value;
-    emitValue<output_buffer>(ctx, _object); // convenience
     emitValue<output_done>(ctx, 1); // pulse
   }
+  emitValue<output_buffer>(ctx, _object); // convenience
 }

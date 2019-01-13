@@ -20,7 +20,7 @@ void evaluate(Context ctx) {
     uint8_t _rez = _object->buffer[ i ];
     //DEBUG_SERIAL.print(F("@")); DEBUG_SERIAL.print((long) _object->buffer);
     //DEBUG_SERIAL.print(F("[")); DEBUG_SERIAL.print(_rez,HEX); DEBUG_SERIAL.print(F("]\n"));
-    emitValue<output_buffer>(ctx, _object); // convenience
     emitValue<output_val>(ctx, _rez); // byte
   }
+  emitValue<output_buffer>(ctx, _object); // convenience
 }
