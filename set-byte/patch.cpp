@@ -15,10 +15,13 @@ void evaluate(Context ctx) {
   uint16_t i = static_cast<uint16_t> (getValue<input_i>(ctx));
   auto _object = getValue<input_buffer1>(ctx); // buffer1
 
-    //DEBUG_SERIAL.print(F("set @")); DEBUG_SERIAL.print((long) _object->buffer);DEBUG_SERIAL.print(F("/"));DEBUG_SERIAL.print(_object->len);
-    //DEBUG_SERIAL.print(F("["));DEBUG_SERIAL.print((int)i);DEBUG_SERIAL.print(F("]="));DEBUG_SERIAL.print((int)value,HEX);
-    //DEBUG_SERIAL.print(F("\n"));
-  if ( i < 0 || i  >= _object->len ) {
+  //DEBUG_SERIAL.print(F("set @")); DEBUG_SERIAL.print((long) _object->buffer);DEBUG_SERIAL.print(F("/"));DEBUG_SERIAL.print(_object->len);
+  //DEBUG_SERIAL.print(F("["));DEBUG_SERIAL.print((int)i);DEBUG_SERIAL.print(F("]="));DEBUG_SERIAL.print((int)value,HEX);
+  //DEBUG_SERIAL.print(F("\n"));
+  if ( ! _object->buffer ) {
+    DEBUG_SERIAL.print(F("buffer1/"));DEBUG_SERIAL.print(F("set-byte")); DEBUG_SERIAL.print(F(" saw unallocated buffer1\n")); // exception
+  }
+  else if ( i < 0 || i  >= _object->len ) {
     emitValue<output_ERR>(ctx, 1); // pulse
   }
   else {

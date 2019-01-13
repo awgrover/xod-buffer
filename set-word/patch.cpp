@@ -15,7 +15,10 @@ void evaluate(Context ctx) {
   uint16_t i = static_cast<uint16_t> (getValue<input_i>(ctx)); // int
   auto _object = getValue<input_buffer1>(ctx); // buffer1
 
-  if ( i < 0 || (sizeof(uint16_t) * i)  >= _object->len ) {
+  if ( ! _object->buffer ) {
+    DEBUG_SERIAL.print(F("buffer1/"));DEBUG_SERIAL.print(F("set-word")); DEBUG_SERIAL.print(F(" saw unallocated buffer1\n")); // exception
+  }
+  else if ( i < 0 || (sizeof(uint16_t) * i)  >= _object->len ) {
     emitValue<output_ERR>(ctx, 1); // pulse
   }
   else {

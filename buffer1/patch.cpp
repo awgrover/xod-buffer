@@ -15,20 +15,24 @@ void evaluate(Context ctx) {
   uint16_t bytes = static_cast<uint16_t> (getValue<input_bytes>(ctx)); // casting gives us 16 bits
   //DEBUG_SERIAL.print(F("buf "));DEBUG_SERIAL.print(bytes);
 
-  _state->buffer = NULL; // we might not even try allocating
-  if (bytes > 0) {
+  if (bytes == 0) {
+    _state->buffer = NULL;
+    DEBUG_SERIAL.print(F("buffer1/buffer1 tried to allocate 0 bytes\n")); // exception
+    }
+  else {
     _state->buffer = malloc( bytes ); // try
     }
   //DEBUG_SERIAL.print(F(" @ "));DEBUG_SERIAL.print((long) _state->buffer);
+  //DEBUG_SERIAL.print(F("\n"));
 
   if (_state->buffer) {
     // worked
     _state->len = bytes;
-    emitValue<output_buffer1>(ctx, _state);
     emitValue<output_done>(ctx, 1); // fix type
     }
   else {
+    _state->len = 0; // to be nice, ->buffer is already NULL
     emitValue<output_ERR>(ctx, 1);
     }
-  //DEBUG_SERIAL.print(F("\n"));
+  emitValue<output_buffer1>(ctx, _state); // must emit, otherwise you get a default value (usually NULL)
 }

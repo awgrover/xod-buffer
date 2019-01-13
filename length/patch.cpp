@@ -11,7 +11,7 @@ void evaluate(Context ctx) {
   if ( !isInputDirty<input_buffer1>(ctx) ) return;
 
   auto _object = getValue<input_buffer1>(ctx); // buffer1
-  auto _rez = _object->len; // int
+  auto _rez = _object->len; // size_t in real life. Report 0 if actually 0
 
   emitValue<output_buffer>(ctx, _object); // convenience
   emitValue<output_val>(ctx, _rez); // int
