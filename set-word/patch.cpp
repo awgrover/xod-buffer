@@ -18,7 +18,7 @@ void evaluate(Context ctx) {
   if ( ! _object->buffer ) {
     DEBUG_SERIAL.print(F("buffer1/"));DEBUG_SERIAL.print(F("set-word")); DEBUG_SERIAL.print(F(" saw unallocated buffer1\n")); // exception
   }
-  else if ( i < 0 || (sizeof(uint16_t) * i)  >= _object->len ) {
+  else if ( i < 0 || (sizeof(uint16_t) * i) + 1  >= _object->len ) { // 2nd byte fits too?
     emitValue<output_ERR>(ctx, 1); // pulse
   }
   else {

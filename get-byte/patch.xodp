@@ -1,6 +1,24 @@
 {
   "nodes": [
     {
+      "id": "B1Ov_8tGE",
+      "label": "trigger",
+      "position": {
+        "x": 204,
+        "y": 102
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "HyXEuLKfV",
+      "label": "done",
+      "position": {
+        "x": 204,
+        "y": 306
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
       "id": "cpp",
       "position": {
         "x": 68,
@@ -39,7 +57,7 @@
       "id": "o-done",
       "label": "ERR",
       "position": {
-        "x": 204,
+        "x": 272,
         "y": 306
       },
       "type": "xod/patch-nodes/output-pulse"

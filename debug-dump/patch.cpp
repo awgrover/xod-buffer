@@ -6,6 +6,7 @@ struct State {
 
 void evaluate(Context ctx) {
     if ( !isInputDirty<input_trigger>(ctx) ) return;
+
     auto mark = getValue<input_mark>(ctx);
     auto _object = getValue<input_buffer1>(ctx);
     char * buf = _object->buffer;
@@ -35,7 +36,7 @@ void evaluate(Context ctx) {
         // 16 hex
         for(char *rowp = buf; rowp < buf+16;rowp++) {
             if (rowp < end) {
-                DEBUG_SERIAL.print((int)*buf,HEX);DEBUG_SERIAL.print(F(" "));
+                DEBUG_SERIAL.print((int)*rowp,HEX);DEBUG_SERIAL.print(F(" "));
             }
             else {
                 DEBUG_SERIAL.print(F("   "));
@@ -45,7 +46,7 @@ void evaluate(Context ctx) {
 
         // 16 chars
         for(char *rowp = buf; rowp < buf+16 && rowp < end;rowp++) {
-            char c = *buf;
+            char c = *rowp;
             DEBUG_SERIAL.print(c > 32 && c <128 ? c : '.');DEBUG_SERIAL.print(F(" "));
         }
         DEBUG_SERIAL.print(F("\n"));

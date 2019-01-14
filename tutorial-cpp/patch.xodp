@@ -4,8 +4,8 @@
       "content": "# Using buffer1 in your .cpp",
       "id": "BJ-qgAwfE",
       "position": {
-        "x": 0,
-        "y": 0
+        "x": -34,
+        "y": -204
       },
       "size": {
         "height": 51,
@@ -13,11 +13,11 @@
       }
     },
     {
-      "content": "## Use reinterpret_cast to make it look like your data structure\nDon't forget to check for compatible number of bytes.\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n\n    // aka word array\n    uint16_t* byte_buffer = reinterpret_cast <uint16_t *> ( _object->buffer ); \n    \n    // you weren't going to forget to check the len?\n    if ( sizeof(SomeStruct)  >= _object->len ) {\n        emitValue<output_ERR>(ctx, 1); // can't use it\n    }\n    else {\n        // any \"type\" you want. if it is right for you.\n        SomeStruct* my_fields = reinterpret_cast<SomeStruct*>( _object->buffer ); \n    \n    \n        ....\n    }\n}\n```",
+      "content": "## Use reinterpret_cast to make it look like your data structure\nDon't forget to check for compatible number of bytes.\n```\nvoid evaluate(Context ctx) {\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n\n    // aka word array\n    uint16_t* word_buffer = reinterpret_cast <uint16_t *> ( buffer1->buffer ); \n    \n    // Your struct\n    // you weren't going to forget to check the len?\n    if ( sizeof(SomeStruct)  >= _object->len ) {\n        emitValue<output_ERR>(ctx, 1); // can't use it\n    }\n    else {\n        // any \"type\" you want. if it is right for you.\n        SomeStruct* my_fields = reinterpret_cast<SomeStruct*>( buffer1->buffer ); \n        ...\n        }\n    \n        ....\n    }\n}\n```",
       "id": "BJYhNRwfN",
       "position": {
-        "x": 510,
-        "y": 612
+        "x": 578,
+        "y": 1224
       },
       "size": {
         "height": 459,
@@ -28,8 +28,8 @@
       "content": "# datatype awgrover/buffer1\nThis is the custom-type you get:\n```\nstruct {\n  std::size_t len; // larger than XOD can deal with\n  byte * buffer;\n}\n```\n",
       "id": "Hk0hxAPG4",
       "position": {
-        "x": 0,
-        "y": 102
+        "x": -34,
+        "y": -102
       },
       "size": {
         "height": 153,
@@ -37,11 +37,11 @@
       }
     },
     {
-      "content": "## `auto` should work.\nJust refer tothe struct fields.\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n    char* byte_buffer = buffer1->buffer;\n    \n    \n    ....\n}\n```",
+      "content": "## `auto` should work.\nJust refer tothe struct fields.\n```\nvoid evaluate(Context ctx) {\n    ...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n    char* byte_buffer = buffer1->buffer;\n    \n    \n    ....\n}\n```",
       "id": "HkN74CDfV",
       "position": {
-        "x": 0,
-        "y": 306
+        "x": 612,
+        "y": 510
       },
       "size": {
         "height": 255,
@@ -49,11 +49,11 @@
       }
     },
     {
-      "content": "## Decompose into the char* and len for typical usage:\nThe `buffer` object carries it's size with it!\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    \n    // your custom-type/class\n    auto radio = getValue<input_radio>;\n    \n    // very common: something( char*, int len);\n    radio->receive( buffer1->buffer, buffer1->len);\n    \n    ....\n    emit...\n}\n```\n",
+      "content": "## Decompose into the char* and len for typical usage:\nThe `buffer` object carries it's size with it!\n```\nvoid evaluate(Context ctx) {\n   ...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    size_t length = buffer1->len;\n    char* byte_buffer = buffer1->buffer;\n\n    // your custom-type/class/object\n    auto radio = getValue<input_radio>;\n    \n    // very common: something( char*, int len);\n    radio->receive( byte_buffer, length);\n    \n    ....\n\n}\n```\n",
       "id": "S1U47CPfN",
       "position": {
-        "x": 510,
-        "y": 102
+        "x": -34,
+        "y": 1122
       },
       "size": {
         "height": 459,
@@ -61,11 +61,59 @@
       }
     },
     {
-      "content": "## Create your own buffer1\nIf you want to be the creator\n```\n// maybe this is the \"constructor\" for your library custom-type...\nvoid evaluate(Context ctx) {\n    \n    int len = 64; // number of bytes\n    char * buffer = malloc( len );\n    // if (!buffer) fail: out of memory\n    __awgrover__buffer1.State* buffer1= new __awgrover__buffer1.State;\n    buffer1->buffer = buffer;\n    buffer1->len = len;\n\n    ...\n    // save the buffer for yourself and provide some node that gets it, or emit it here\n    emitValue<output_buffer1>(ctx, buffer1); // set the output pin to awgrover/output-buffer1\n}\n```",
+      "content": "## Always check for a good buffer\nI'd recommend doing nothing if the buffer is bad, and generating a debug messge. But, always emit the buffer1 so the object is not NULL.\nThe ->buffer will be NULL if bad. \n```\nvoid evaluate(Context ctx) {\n  auto buffer1 = getValue<input_buffer1>(ctx);\n\n  if ( ! buffer1->buffer ) {\n    DEBUG_SERIAL.print(F(\"buffer1/\"));DEBUG_SERIAL.print(F(\"set-word\")); DEBUG_SERIAL.print(F(\" saw unallocated buffer1\\n\")); // exception\n  }\n  else {      \n    ....\n  }\n  emitValue<output_buffer>(ctx, buffer1); // always\n}\n```",
+      "id": "SJOXnuKzV",
+      "position": {
+        "x": 612,
+        "y": 816
+      },
+      "size": {
+        "height": 357,
+        "width": 510
+      }
+    },
+    {
+      "content": "## Skeleton Example\nSee more comments for more detail\n```\nvoid evaluate(Context ctx) {\n\n  // only act on trigger, inputs not relevant for \"dirty\"\n  if ( !isInputDirty<input_trigger>(ctx) ) return;\n\n  // `auto` should work to get the struct\n  auto buffer1 = getValue<input_buffer1>(ctx);\n\n  // Do nothing on bad buffer\n  if ( ! buffer1->buffer ) {\n    DEBUG_SERIAL.print(F(\"this/lib/node saw unallocated buffer1\\n\"));\n    // Emit nothing else\n    // Could emit ERR, but then multiple cases cause ERR\n    // But do fall through to emit the buffer1\n  }\n  \n  else {     \n\n    // decompose when convenient\n    size_t buffer_length = buffer1->len;\n    char* byte_buffer = buffer1->buffer;\n    // or maybe it's a struct (check ->len vs sizeof()!)\n    YourStruct data = reinterpret_cast<YourStruct*> buffer1->buffer;\n    \n    ... some of your own work ...\n    ... but check for out-of-range, etc. ...\n    \n    if (out of range, or some other error) {\n        emitValue<output_ERR>(ctx, 1);\n        // fall through and emit the buffer1\n        }\n    \n    else {\n        \n        ... finish work with buffer ...\n        // emit ERR if appropriate\n        \n        // otherwise\n        emitValue<output_done>(ctx, 1);\n        }\n\n  // always\n  emitValue<output_buffer>(ctx, buffer1); // convenience\n}\n```",
+      "id": "SJQ9xKFGE",
+      "position": {
+        "x": -34,
+        "y": 102
+      },
+      "size": {
+        "height": 969,
+        "width": 646
+      }
+    },
+    {
+      "content": "## Take action only on `trigger`, emit `done` or `err`\nBuffers are impure, so you need pulses to keep order of execution correct.\n```\nvoid evaluate(Context ctx) {\n  // only act on trigger, inputs not relevant for \"dirty\"\n  if ( !isInputDirty<input_trigger>(ctx) ) return;\n    \n  if ( something is wrong ) {\n    emitValue<output_ERR>(ctx, 1);\n  }\n  else {\n    ...do your thing...\n    emitValue<output_done>(ctx, 1); // did it\n  }    \n    \n    ....\n}\n```",
+      "id": "SJzVqutGE",
+      "position": {
+        "x": 612,
+        "y": 102
+      },
+      "size": {
+        "height": 357,
+        "width": 510
+      }
+    },
+    {
+      "content": "## If you have an `output-buffer1`, always emit it\nIf you don't emit it, it will be NULL, which could confuse chained nodes.\nIf you follow this protocol, you don't have to worry that `buffer1` is null.\n\n```\nvoid evaluate(Context ctx) {\n    ...\n\n    auto buffer1 = getValue<input_buffer1>(ctx);\n   \n    ....\n\n    // always fall through to do this:\n    emitValue<output_buffer>(ctx, buffer1);\n}\n```",
+      "id": "SyvcsdtzV",
+      "position": {
+        "x": 578,
+        "y": 1734
+      },
+      "size": {
+        "height": 357,
+        "width": 510
+      }
+    },
+    {
+      "content": "## Create your own buffer1\nIf you want to be the creator\n```\n// maybe this is the \"constructor\" for your library custom-type...\nvoid evaluate(Context ctx) {\n    \n    int len = 64; // number of bytes\n    char * buffer = malloc( len );\n    // if (!buffer) fail: out of memory. Emit an error!\n    __awgrover__buffer1.State* buffer1= new __awgrover__buffer1.State;\n    buffer1->buffer = buffer;\n    buffer1->len = len;\n\n    ...\n    // save the buffer for yourself and provide some node that gets it, or emit it here\n    emitValue<output_buffer1>(ctx, buffer1); // set the output pin to awgrover/output-buffer1\n}\n```",
       "id": "rJMK8AwGE",
       "position": {
-        "x": 0,
-        "y": 1122
+        "x": 68,
+        "y": 2754
       },
       "size": {
         "height": 459,
@@ -73,14 +121,14 @@
       }
     },
     {
-      "content": "## Always check the ->len vs. an index\nDon't use an index without checking!\n```\nvoid evaluate(Context ctx) {\n    // if ! dirty, return...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    \n    auto index = getValue<input_i>; // check this\n    \n    // Check for out-of-range, and signal an error\n    // Remember, buffer1->buffer is a char*\n    // If using words, it's (i*2) >= len, etc.\n    if ( i < 0 || i  >= _object->len ) {\n        emitValue<output_ERR>(ctx, 1); // pulse\n    }\n    else {\n        // do something useful...\n        something = ... buffer1->buffer[i] ...\n        emitValue<output_something>(ctx, something);\n        }\n    }\n}\n```\n",
+      "content": "## Always check the ->len vs. an index\nDon't use an index without checking!\n```\nvoid evaluate(Context ctx) {\n    ...\n    \n    auto buffer1 = getValue<input_buffer1>(ctx);\n    \n    auto index = getValue<input_i>; // check this\n    \n    // Check for out-of-range, and signal an error\n    // Remember, buffer1->buffer is a char*\n    // If using words, it's out of range: \n    // if &word_buff[i] > &byte_buf[buffer1->len/sizeof(uint16_t)]\n    if ( i < 0 || i  >= buffer1->len ) {\n        emitValue<output_ERR>(ctx, 1); // pulse\n    }\n    else {\n        // do something useful...\n        int something = ... buffer1->buffer[i] ...\n        emitValue<output_something>(ctx, something);\n        }\n    }\n}\n```\n",
       "id": "rkVQWRDM4",
       "position": {
-        "x": 0,
-        "y": 612
+        "x": -34,
+        "y": 1530
       },
       "size": {
-        "height": 459,
+        "height": 561,
         "width": 510
       }
     }
