@@ -1,31 +1,31 @@
 {
-   "description" : "Allows to create feedback loops. Repeats a change of the input on the output right after the current transaction will complete.",
-   "nodes" : [
-      {
-         "id" : "BJI7P8t9Z",
-         "label" : "IN",
-         "position" : {
-            "x" : 0,
-            "y" : 0
-         },
-         "type" : "@/input-buffer1"
+  "description": "Allows to create feedback loops. Repeats a change of the input on the output right after the current transaction will complete.",
+  "nodes": [
+    {
+      "id": "BJI7P8t9Z",
+      "label": "IN",
+      "position": {
+        "x": 0,
+        "y": 0
       },
-      {
-         "id" : "HJhXDIY9-",
-         "label" : "OUT",
-         "position" : {
-            "x" : 0,
-            "y" : 204
-         },
-         "type" : "@/output-buffer1"
+      "type": "@/input-buffer1"
+    },
+    {
+      "id": "HJhXDIY9-",
+      "label": "OUT",
+      "position": {
+        "x": 0,
+        "y": 204
       },
-      {
-         "id" : "rkFQwUYc-",
-         "position" : {
-            "x" : 0,
-            "y" : 102
-         },
-         "type" : "xod/patch-nodes/not-implemented-in-xod"
-      }
-   ]
+      "type": "@/output-buffer1"
+    },
+    {
+      "id": "rkFQwUYc-",
+      "position": {
+        "x": 0,
+        "y": 102
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
 }
